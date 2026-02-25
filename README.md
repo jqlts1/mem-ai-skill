@@ -83,11 +83,36 @@ curl -s "https://api.mem.ai/v2/collections?limit=1" \
   --header "Authorization: Bearer $MEM_API_KEY"
 ```
 
+## 脚本封装（推荐）
+
+新增了可直接调用的 Python CLI：`scripts/memctl`
+
+```bash
+# 保存笔记
+~/.agents/skills/mem-ai-skill/scripts/memctl save "# 今日记录\n\n完成了 A/B 测试"
+
+# 搜索笔记
+~/.agents/skills/mem-ai-skill/scripts/memctl search "A/B 测试" --limit 5
+
+# 查看最近笔记
+~/.agents/skills/mem-ai-skill/scripts/memctl list --limit 5
+```
+
+也可用别名简化：
+
+```bash
+ln -sf ~/.agents/skills/mem-ai-skill/scripts/memctl ~/.local/bin/memctl
+memctl list --limit 5
+```
+
 ## Skill 目录结构
 
 ```
 mem-ai/
 ├── SKILL.md                          # 路由决策树 + 工作流 + API 概览
+├── scripts/
+│   ├── memctl                        # Bash 入口
+│   └── memctl.py                     # Python CLI（save/search/list）
 └── references/
     ├── mem-it.md                     # mem-it 接口参数、指令模板、示例
     ├── note-crud.md                  # create / read / list / delete 完整参数
