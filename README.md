@@ -96,6 +96,15 @@ curl -s "https://api.mem.ai/v2/collections?limit=1" \
 
 # 查看最近笔记
 ~/.agents/skills/mem-ai-skill/scripts/memctl list --limit 5
+
+# 读取笔记
+~/.agents/skills/mem-ai-skill/scripts/memctl read <note_id>
+
+# 更新笔记（同 id 覆盖；支持 replace/append/prepend）
+~/.agents/skills/mem-ai-skill/scripts/memctl update <note_id> --file ./note.md
+
+# 删除笔记
+~/.agents/skills/mem-ai-skill/scripts/memctl delete <note_id>
 ```
 
 也可用别名简化：

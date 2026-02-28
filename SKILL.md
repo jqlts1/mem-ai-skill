@@ -34,6 +34,15 @@ export MEM_API_KEY=your_api_key_here
 
 # 查看最近笔记
 ~/.agents/skills/mem-ai-skill/scripts/memctl list --limit 5
+
+# 读取笔记
+~/.agents/skills/mem-ai-skill/scripts/memctl read <note_id>
+
+# 更新笔记（同 id 覆盖）
+~/.agents/skills/mem-ai-skill/scripts/memctl update <note_id> --file ./note.md
+
+# 删除笔记
+~/.agents/skills/mem-ai-skill/scripts/memctl delete <note_id>
 ```
 
 ## API 概览（11 个端点）
@@ -55,6 +64,10 @@ export MEM_API_KEY=your_api_key_here
 ## 路由决策
 
 ### 写入路由：mem-it vs create-note
+
+**更新说明（无独立 update 端点）**
+- 通过 `POST /v2/notes` 携带已有 `id` 实现更新（upsert）。
+- 推荐流程：先 `read` 获取现有内容，再按需合并，最后 `update` 覆盖写回。
 
 **判断标准：内容是否需要 AI 处理？**
 

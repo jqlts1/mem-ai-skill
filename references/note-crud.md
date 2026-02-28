@@ -49,6 +49,43 @@ Success (200 OK):
 
 ---
 
+## 1.5 Update Note (Upsert)
+
+### Endpoint
+```
+POST /v2/notes
+```
+
+Mem API 没有独立的 `PATCH/PUT` 更新端点。更新笔记时，使用已有 `id` 再次调用 `POST /v2/notes`，即可覆盖内容。
+
+### 推荐流程
+
+1. `GET /v2/notes/{note_id}` 读取原内容
+2. 在本地合并/修改内容
+3. `POST /v2/notes` 携带同一个 `id` 写回
+
+### 请求示例
+
+```bash
+# 覆盖更新同一条笔记
+curl "https://api.mem.ai/v2/notes" \
+  --header "Content-Type: application/json" \
+  --header "Authorization: Bearer $MEM_API_KEY" \
+  --data '{
+    "id": "5e29c8a2-c73b-476b-9311-e2579712d4b1",
+    "content": "# Sales Call with Acme Corp\n\nUpdated follow-up: schedule demo next Tuesday.",
+    "collection_ids": ["59508b41-8770-4855-aa37-302b1e09aee7"]
+  }'
+```
+
+### 响应特征
+
+- `id` 保持不变
+- `created_at` 保持原值
+- `updated_at` 会刷新
+
+---
+
 ## 2. Read Note
 
 ### Endpoint
