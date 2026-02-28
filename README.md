@@ -121,10 +121,10 @@ mem-ai/
 ├── SKILL.md                          # 路由决策树 + 工作流 + API 概览
 ├── scripts/
 │   ├── memctl                        # Bash 入口
-│   └── memctl.py                     # Python CLI（save/search/list）
+│   └── memctl.py                     # Python CLI（save/search/list/read/update/delete）
 └── references/
     ├── mem-it.md                     # mem-it 接口参数、指令模板、示例
-    ├── note-crud.md                  # create / read / list / delete 完整参数
+    ├── note-crud.md                  # create / update(upsert) / read / list / delete 完整参数
     ├── search.md                     # search 接口参数与筛选维度
     └── collections-and-errors.md     # Collection 完整 CRUD + 错误码
 ```
