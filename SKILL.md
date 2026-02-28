@@ -45,6 +45,33 @@ export MEM_API_KEY=your_api_key_here
 ~/.agents/skills/mem-ai-skill/scripts/memctl delete <note_id>
 ```
 
+## 更新笔记的推荐写法（避免换行问题）
+
+- `replace`：用新内容完整覆盖旧内容（推荐多行内容使用 `--file`）
+- `append`：在原文末尾追加
+- `prepend`：在原文开头追加
+
+```bash
+# 1) 完整覆盖（最稳）
+~/.agents/skills/mem-ai-skill/scripts/memctl update <note_id> --file ./note.md --mode replace
+
+# 2) 追加单行
+~/.agents/skills/mem-ai-skill/scripts/memctl update <note_id> "- 已完成联调" --mode append
+
+# 3) 追加多行（用文件，避免把 \n 当成普通字符）
+cat > /tmp/append.md <<'EOF'
+## 更新记录
+
+- 支付链路已验证
+- 积分扣减已验证
+EOF
+~/.agents/skills/mem-ai-skill/scripts/memctl update <note_id> --file /tmp/append.md --mode append
+```
+
+Markdown 格式建议：
+- 一级标题后留一个空行（`# 标题` 后空一行再写正文）
+- 列表项之间可不留空行，保持紧凑
+
 ## API 概览（11 个端点）
 
 | 接口 | 方法 | 定位 |
