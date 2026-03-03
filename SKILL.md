@@ -117,10 +117,19 @@ Markdown 格式建议：
 
 **使用 search（POST /v2/notes/search）当：**
 - 用户有明确的搜索意图："查找关于X的笔记"
-- 需要按关键词检索
+- 需要语义检索（推荐）或关键词检索
 - 需要多维筛选组合（Collection + 任务状态 + 媒体类型）
 - 参数：`query`, `collection_ids`, `contains_open_tasks`, `contains_tasks`, `contains_images`, `contains_files`
 - 详见 [references/search.md](references/search.md)
+
+**Search Query 写法（语义优先，默认策略）**
+- 优先使用**一句自然语言**描述目标，不必先窄后宽
+- 推荐模板：`我想找 + 主题 + 场景 + 想得到的信息`
+- 关键词补充时，用空格分隔 3-8 个核心词即可（不要拼成一个长词）
+- 推荐混合写法：`自然语言一句话 + 2~4 个核心关键词`
+- 仅当结果不理想时再微调：
+  - 结果太杂：增加限定词（项目名/工具名/时间词）
+  - 结果太少：删除限制词，换同义表达
 
 **使用 list（GET /v2/notes）当：**
 - 用户想浏览最近的笔记："看看我最近的笔记"
@@ -177,7 +186,7 @@ search(`contains_open_tasks=true`) → 汇总所有未完成待办
 创建 Collection → create-note 归类笔记到该 Collection
 
 ### 4. 知识检索
-search(`query=关键词`) → read(`note_id`) 获取完整内容
+search(`query=自然语言一句话 + 关键词`) → read(`note_id`) 获取完整内容
 
 ### 5. 笔记清理
 list 浏览笔记 → delete 删除不需要的笔记
