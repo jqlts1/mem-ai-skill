@@ -13,6 +13,22 @@ description: >
 
 Mem AI 个人知识库 API 集成——智能捕获、存储、搜索、管理你的知识。
 
+## 最优先入口（IMPORTANT）
+
+默认先用封装命令 `~/.agents/skills/mem-ai-skill/scripts/memctl`，不要先手写 `curl`。
+只有在调试底层 API 或 `memctl` 不覆盖的场景，才回退到原始接口。
+
+常用命令速览：
+
+```bash
+~/.agents/skills/mem-ai-skill/scripts/memctl save "# 标题\n\n正文"
+~/.agents/skills/mem-ai-skill/scripts/memctl search "关键词" --limit 5
+~/.agents/skills/mem-ai-skill/scripts/memctl list --limit 5
+~/.agents/skills/mem-ai-skill/scripts/memctl read <note_id>
+~/.agents/skills/mem-ai-skill/scripts/memctl update <note_id> --file ./note.md --mode replace
+~/.agents/skills/mem-ai-skill/scripts/memctl delete <note_id>
+```
+
 ## 前置要求
 
 所有接口通过 Bash 执行 `curl` 命令调用，需要环境变量 `MEM_API_KEY`：
