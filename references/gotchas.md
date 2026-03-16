@@ -2,7 +2,7 @@
 
 ## 1. 先用 `memctl`，不要默认手写 `curl`
 
-优先执行 `~/.agents/skills/mem-ai-skill/scripts/memctl`。
+优先执行 `scripts/memctl`。
 只有在以下情况才直接打底层 API：
 - 需要 `mem-it`
 - 需要 Collection 的创建 / 搜索 / 删除
